@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>管理员界面</h1>
+    <form action="/admin" method="POST">
+        <table>
+            <tr>
+                <th>
+                    姓名
+                </th>
+                <th>
+                    学校
+                </th>
+                <th>
+                    班级
+                </th>
+                <th>
+                    语文
+                </th>
+                <th>
+                    数学
+                </th>
+                <th>
+                    英语
+                </th>
+                <th>
+                    综合
+                </th>
+                <th>
+                    预测大学
+                </th>
+            </tr>
+            {{each messages}}
+            <tr>
+                <td>{{$value.sname}}</td>
+                <td>{{$value.school}}</td>
+                <td>{{$value.class}}</td>
+                <td><input type="text" name="chinese" id="">
+                </td>
+                <td>
+                    <input type="text" name="math" id="">
+                </td>
+                <td>
+                    <input type="text" name="english" id="">
+                </td>
+                <td>
+                    <input type="text" name="composite" id="">
+                </td>
+                <td>
+                    <input type="text" name="university" id="">
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+        <button type="submit">保存</button>
+    </form>
+    <script>
+        function check(){
+            if({$code}==200){
+                alert('出错，请检查无误后提交')
+            }
+            else if({$code}==201){
+                alert('保存成功')
+            }
+        }
+    </script>
+</body>
+</html>

@@ -6,9 +6,10 @@ var logger = require('morgan');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var express_art_template = require('express-art-template')
+var express_art_template = require('express-art-template');
+var crypto = require('crypto')
 // var connect = require('./model/connect')
-
+var index = require('./routes/index')
 var login = require('./routes/login');
 var register = require('./routes/register');
 var student = require('./routes/student');
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret:'secret key'
 }))
+app.use('/',index)
 app.use('/',login);
 app.use('/',register);
 app.use('/',student);

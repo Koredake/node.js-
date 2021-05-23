@@ -23,7 +23,7 @@ router.get('/student',(req,res)=>{
                     var all = chinese+math+english+composite;
                     // console.log(results);
                     // console.log(uname,school,b_class);
-                    res.render("grmp",{user:uname,b_school:school,be_class:b_class,Chinese:chinese,Math:math,English:english,Composite:composite,All:all,University:university})
+                    res.render("student",{user:uname,b_school:school,be_class:b_class,Chinese:chinese,Math:math,English:english,Composite:composite,All:all,University:university})
                 })
             }
             else if(search_results[0].is_insert == '0'&&req.session.now_name == search_results[0].sname){
@@ -44,7 +44,7 @@ router.get('/student',(req,res)=>{
                     var all = '-';
                     // console.log(results);
                     // console.log(uname,school,b_class);
-                    res.render("grmp",{user:uname,b_school:school,be_class:b_class,Chinese:chinese,Math:math,English:english,Composite:composite,All:all,University:university})
+                    res.render("student",{user:uname,b_school:school,be_class:b_class,Chinese:chinese,Math:math,English:english,Composite:composite,All:all,University:university})
                 })
             }
             else{

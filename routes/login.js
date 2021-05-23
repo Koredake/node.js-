@@ -6,7 +6,7 @@ var router = express.Router();
 // var {User} = require('../model/user')
 
 router.get('/login', function(req, res, next) {
-  res.render('login2');
+  res.render('login');
 });
 router.post('/login', (req,res)=>{
   //接收请求参数  

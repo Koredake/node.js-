@@ -10,16 +10,8 @@ router.get('/register', function(req, res, next) {
 });
 router.post('/register',(req,res)=>{
 function createUsers(){
-    let info = new student(req.body.name,req.body.pwd1,req.body.school,req.body.belong_class,req.body.phoneNumber)
-    // const salt = await bcrypt.genSalt(10);
-    // const pass = await bcrypt.hash(info.pwd,salt);
-    // User.create({
-    //   userName:req.body.name,
-    //   password:pass,
-    //   school:req.body.school,
-    //   class:req.body.class,
-    //   phoneNumber:req.body.phoneNumber
-    // })
+    let info = new student(req.body.name,req.body.pwd1,req.body.school,req.body.belong_class,req.body.phoneNumber);
+    console.log(info.phone_number);
     if(info.name == ''){
       res.send('姓名不能为空')
       return
@@ -49,7 +41,6 @@ function createUsers(){
       return
     }
   connection.query("insert into tab_student(sname,password,school,class,phoneNumber) value('"+info.name+"','"+info.pwd+"','"+info.school+"','"+info.belong_class+"','"+info.phone_number+"')",(err,results,fields)=>{
-    console.log(err);
   })
   }
   createUsers();

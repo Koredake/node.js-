@@ -23,7 +23,8 @@ router.post('/login', (req,res)=>{
         res.redirect('admin')
       }
 
-      else{connection.query("select * from tab_student where sname ='"+usr+"'",(err,results,fields)=>{
+      else{
+        connection.query("select * from tab_student where sname ='"+usr+"'",(err,results,fields)=>{
         // console.log(err);
         let in_name = results[0].sname;
         let pas = results[0].password;

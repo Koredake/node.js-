@@ -1,6 +1,6 @@
 var express = require('express');
-var bcrypt = require('bcrypt');
-var crypto = require('crypto');
+// var bcrypt = require('bcrypt');
+// var crypto = require('crypto');
 var connection = require('../model/connect_mysql');
 var router = express.Router();
 // var {User} = require('../model/user')
@@ -28,7 +28,12 @@ router.post('/login', (req,res)=>{
         let in_name = results[0].sname;
         let pas = results[0].password;
         req.session.now_name = in_name;
-        res.redirect('student')
+        if(usr == in_name && pwds == pas){
+          res.redirect('student')
+        }
+        else{
+          res.render('error')
+        }
     })}
         // 将用户输入密码与数据库密码进行解密匹配
         // let istrue = bcrypt.compare(pwds,pas)

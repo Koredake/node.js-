@@ -9,9 +9,26 @@
 <body>
     <form action="/add" method="POST">
         <input type="text" placeholder="请输入姓名" name="add_name"><br>
-        <input type="text" placeholder="请输入学校" name="add_school"><br>
-        <input type="text" placeholder="请输入班级" name="add_class"><br>
-        <button type="submit">保存</button>
+        <input type="text" placeholder="请输入学校" name="add_school" list="school">
+        <datalist id="school">
+            <option value="南昌二中">
+                南昌二中
+            </option>
+            <option value="师大附中">
+                师大附中
+            </option>
+        </datalist>
+        <input type="text" placeholder="请输入班级" name="add_class" list="class">
+        <datalist id="class">
+        <option value="高三一班">
+            高三一班
+        </option>
+        <option value="高三二班">
+            高三二班
+        </option>
+        </datalist>
+        <br>
+        <button class="save">保存</button>
     </form>
 </body>
 </html>

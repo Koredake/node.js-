@@ -41,11 +41,15 @@ function createUsers(){
       return
     }
   connection.query("insert into tab_student(sname,password,school,class,phoneNumber) value('"+info.name+"','"+info.pwd+"','"+info.school+"','"+info.belong_class+"','"+info.phone_number+"')",(err,results,fields)=>{
+    if(err){
+      console.log(err);
+    }
   })
   }
   createUsers();
+  console.log("error");
 // }
-  res.redirect('/login')
+  // res.redirect('/login')
 
 })
 

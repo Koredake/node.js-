@@ -9,28 +9,55 @@ const { json } = require('express');
 //                     res.render('admin',{messages:results_show})
 //                 })
 //     })
+    // router.get('/admin',(req,res)=>{
+    //     let sql = 'select sname,school,class,id from tab_student';
+    //     connection.query(sql,(err,results)=>{
+    //         res.render('admin1',{messages:results})
+    //     })
+    // })
     router.get('/admin',(req,res)=>{
-        let sql = 'select sname,school,class,id from tab_student';
-        connection.query(sql,(err,results)=>{
-            res.render('admin1',{messages:results})
+        res.render('index1')
+    })
+    router.get('/tables',(req,res)=>{
+        let sql_show = 'select sname,school,class from tab_student where school = "南昌二中"'
+        connection.query(sql_show,(err,results_show)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                let sql_sd = 'select * from tab_student where school = "师大附中"'
+                connection.query(sql_sd,(err,sd_results)=>{
+                    console.log(sd_results);
+                    res.render('tables',{st_info:results_show,sd_info:sd_results})
+                })
+            }
         })
     })
     router.get('/add',(req,res)=>{
-        res.render('add')
+        let sql_se_add = 'select school_name,class_name from tab_school as s inner join tab_class as c on c.school_id = s.id'
+        connection.query(sql_se_add,(err,sc_results)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log(sc_results);
+                res.render('add',{sc_info:sc_results})}
+        })
     })
     router.post('/add',(req,res)=>{
         let sql_add = 'insert into tab_student(sname,school,class) values("'+req.body.add_name+'","'+req.body.add_school+'","'+req.body.add_class+'")';
         connection.query(sql_add,(err,results)=>{
             if(err){
                 console.log(err);
+                res.send(err)
             }
             else{
-                res.json('add_ok')
+                res.redirect('/tables')
             }
         })
     })
     router.get('/del',(req,res)=>{
-let id = req.query.id
+let id = req.query.id;
 let sql_del = 'delete from tab_student where id ='+id+''
 connection.query(sql_del,(err,results)=>{
     if(err){
@@ -53,27 +80,36 @@ connection.query(sql_del,(err,results)=>{
                 res.json('ok')
         }
         })
-        router.get('/change1',(req,res)=>{
-            res.render('change')
-        })
-        router.post('/change',(req,res)=>{
-            let sql_change = 'update tab_student set sname ="'+req.body.change_name+'",school ="'+req.body.change_school+'",class="'+req.body.change_class+'" where id ='+id_change+'';
-            connection.query(sql_change,(err,results)=>{
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    res.send('success')
-                }
-            })
-        })
-        // res.render('change')
-        // let id = req.query.id
-        // let sql_change = 'update tab_student set '
     })
-    // router.post('/change',(req,res)=>{
-    //     let sql_up = 'update yab_student set sname='+req.body.change_name+''
-    // })
+    router.get('/change1',(req,res)=>{
+        res.render('change')
+    })
+    router.post('/change',(req,res)=>{
+        let sql_change = 'update tab_student set sname ="'+req.body.change_name+'",school ="'+req.body.change_school+'",class="'+req.body.change_class+'" where id ='+id_change+'';
+        connection.query(sql_change,(err,results)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect('/tables')
+            }
+        })
+    })
+    router.get('/search',(req,res)=>{
+        let in_name = req.query.name
+        console.log(in_name );
+        let sql_find = 'select * from tab_student where sname = "'+in_name+'"';
+        connection.query(sql_find,(err,results)=>{
+            if(err){
+                console.log(err);
+                res.json({status:'err'})
+            }
+            else{
+                console.log(results);
+                res.json({search_res:results,status:'okay'})
+            }
+        })
+    })
 router.post('/admin',(req,res)=>{
     let sql_search = "select tab_student.id from tab_score inner join tab_student on tab_score.student_id = tab_student.id where is_insert = 0";
     connection.query(sql_search,(err,sid_results)=>{

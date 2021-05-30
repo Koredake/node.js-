@@ -19,13 +19,13 @@ const { json } = require('express');
         res.render('index1')
     })
     router.get('/tables',(req,res)=>{
-        let sql_show = 'select sname,school,class from tab_student where school = "南昌二中"'
+        let sql_show = 'select id,sname,school,class,student_num from tab_student where school = "南昌二中" order by class,student_num'
         connection.query(sql_show,(err,results_show)=>{
             if(err){
                 console.log(err);
             }
             else{
-                let sql_sd = 'select * from tab_student where school = "师大附中"'
+                let sql_sd = 'select * from tab_student where school = "师大附中" order by class,student_num'
                 connection.query(sql_sd,(err,sd_results)=>{
                     console.log(sd_results);
                     res.render('tables',{st_info:results_show,sd_info:sd_results})
@@ -45,7 +45,7 @@ const { json } = require('express');
         })
     })
     router.post('/add',(req,res)=>{
-        let sql_add = 'insert into tab_student(sname,school,class) values("'+req.body.add_name+'","'+req.body.add_school+'","'+req.body.add_class+'")';
+        let sql_add = 'insert into tab_student(sname,school,class,student_num) values("'+req.body.add_name+'","'+req.body.add_school+'","'+req.body.add_class+'",'+req.body.stu_num+')';
         connection.query(sql_add,(err,results)=>{
             if(err){
                 console.log(err);
@@ -96,18 +96,20 @@ connection.query(sql_del,(err,results)=>{
         })
     })
     router.get('/search',(req,res)=>{
-        let in_name = req.query.name
-        console.log(in_name );
+        let in_name = req.query.name;
         let sql_find = 'select * from tab_student where sname = "'+in_name+'"';
         connection.query(sql_find,(err,results)=>{
             if(err){
                 console.log(err);
                 res.json({status:'err'})
             }
-            else{
+            else if(results.length == 0){
                 console.log(results);
-                res.json({search_res:results,status:'okay'})
+                res.json({status:'emp'})
             }
+            else{
+                res.json({search_res:results,status:'okay'})
+                }
         })
     })
 router.post('/admin',(req,res)=>{

@@ -5,29 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+	<link href="/stylesheets/app.css" rel="stylesheet">
 </head>
 <body>
+    <h1>新增学生</h1>
     <form action="/add" method="POST">
-        <input type="text" placeholder="请输入姓名" name="add_name"><br>
-        <input type="text" placeholder="请输入学校" name="add_school" list="school">
-        <datalist id="school">
-            <option value="南昌二中">
-                南昌二中
-            </option>
-            <option value="师大附中">
-                师大附中
-            </option>
-        </datalist>
-        <input type="text" placeholder="请输入班级" name="add_class" list="class">
-        <datalist id="class">
-        <option value="高三一班">
-            高三一班
-        </option>
-        <option value="高三二班">
-            高三二班
-        </option>
-        </datalist>
-        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th style="width:40%;">Name</th>
+                    <th style="width:25%">school</th>
+                    <th class="d-none d-md-table-cell" style="width:25%">class</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="text" name="stu_num" placeholder="请输入学号">
+                    </td>
+                    <td>
+                        <input type="text" placeholder="请输入姓名" name="add_name">
+                    </td>
+                    <td>
+                        <input type="text" placeholder="请输入学校" name="add_school" list="school"><br>
+                        <datalist id="school">
+                            <option value="南昌二中">
+                                南昌二中
+                            </option>
+                            <option value="师大附中">
+                                师大附中
+                            </option>
+                        </datalist>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="请输入班级" name="add_class" list="class"><br>
+                        <datalist id="class">
+                        <option value="高三一班">
+                            高三一班
+                        </option>
+                        <option value="高三二班">
+                            高三二班
+                        </option>
+                        </datalist>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
         <button class="save">保存</button>
     </form>
 </body>

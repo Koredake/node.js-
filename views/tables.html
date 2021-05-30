@@ -5,9 +5,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="description" content="Responsive Admin &amp; 统计表 Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, 统计表, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
 	<link rel="shortcut icon" href="/images/icons/icon-48x48.png" />
 
@@ -20,7 +20,7 @@
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
+				<a class="sidebar-brand" href="/admin">
           <span class="align-middle">AdminKit</span>
         </a>
 
@@ -30,8 +30,8 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="index.html">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+						<a class="sidebar-link" href="/admin">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">统计表</span>
             </a>
 					</li>
 
@@ -64,11 +64,11 @@
 					</li>
 					<li class="sidebar-item">
 						<a data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
-              <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">UI Elements</span>
+              <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">表格</span>
             </a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-alerts.html">Alerts</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-buttons.html">Buttons</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="/tables">学生信息</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="/score">学生分数</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="ui-cards.html">Cards</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="ui-general.html">General</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="ui-grid.html">Grid</a></li>
@@ -94,7 +94,7 @@
 					</li>
 
 					<li class="sidebar-item active">
-						<a class="sidebar-link" href="tables-bootstrap.html">
+						<a class="sidebar-link" href="/tables">
               <i class="align-middle" data-feather="list"></i> <span class="align-middle">Tables</span>
             </a>
 					</li>
@@ -301,7 +301,7 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3">Tables</h1>
+					<h1 class="h3 mb-3">学生信息</h1>
 
 					<div class="row">
 						<div class="col-12 col-xl-6">
@@ -313,6 +313,7 @@
 								<table class="table">
 									<thead>
 										<tr>
+											<th>id</th>
 											<th style="width:40%;">Name</th>
 											<th style="width:25%">school</th>
 											<th class="d-none d-md-table-cell" style="width:25%">class</th>
@@ -322,6 +323,7 @@
 									<tbody>
 										{{each st_info}}
 										<tr>
+											<td>{{$value.student_num}}</td>
 											<td>{{$value.sname}}</td>
 											<td>{{$value.school}}</td>
 											<td class="d-none d-md-table-cell">{{$value.class}}</td>
@@ -345,6 +347,7 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
+											<th>id</th>
 											<th style="width:40%;">Name</th>
 											<th style="width:25%">school</th>
 											<th class="d-none d-md-table-cell" style="width:25%">class</th>
@@ -354,6 +357,7 @@
 									<tbody>
 										{{each sd_info}}
 										<tr>
+											<td>{{$value.student_num}}</td>
 											<td>{{$value.sname}}</td>
 											<td>{{$value.school}}</td>
 											<td class="d-none d-md-table-cell">{{$value.class}}</td>
@@ -368,7 +372,7 @@
 							</div>
 						</div>
 
-						<div class="col-12 col-xl-6">
+						<!-- <div class="col-12 col-xl-6">
 							<div class="card">
 								<div class="card-header">
 									<h5 class="card-title">Condensed Table</h5>
@@ -431,9 +435,9 @@
 									</tbody>
 								</table>
 							</div>
-						</div>
+						</div> -->
 
-						<div class="col-12 col-xl-6">
+						<!-- <div class="col-12 col-xl-6">
 							<div class="card">
 								<div class="card-header">
 									<h5 class="card-title">Hoverable Rows</h5>
@@ -479,9 +483,9 @@
 									</tbody>
 								</table>
 							</div>
-						</div>
+						</div> -->
 
-						<div class="col-12 col-xl-6">
+						<!-- <div class="col-12 col-xl-6">
 							<div class="card">
 								<div class="card-header">
 									<h5 class="card-title">Bordered Table</h5>
@@ -545,9 +549,9 @@
 									</tbody>
 								</table>
 							</div>
-						</div>
+						</div> -->
 
-						<div class="col-12 col-xl-6">
+						<!-- <div class="col-12 col-xl-6">
 							<div class="card">
 								<div class="card-header">
 									<h5 class="card-title">Contextual Classes</h5>
@@ -611,7 +615,7 @@
 									</tbody>
 								</table>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="col-12">
 							<div class="card">
@@ -687,7 +691,7 @@
 					<div class="row text-muted">
 						<div class="col-6 text-left">
 							<p class="mb-0">
-								<a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy;
+								<a href="/admin" class="text-muted"><strong>AdminKit Demo</strong></a> &copy;
 							</p>
 						</div>
 						<div class="col-6 text-right">
@@ -752,8 +756,11 @@ $.ajax({
 				if(data.status=='err'){
 					alert("错误")
 				}
-				if(data.status == "okay"){
-					alert(data.search_res)
+				else if(data.status == "emp"){
+					alert("该学生不存在")
+				}
+				else if(data.status == "okay"){
+					alert(JSON.stringify(data.search_res[0].sname)+JSON.stringify(data.search_res[0].school)+JSON.stringify(data.search_res[0].class))
 				}
 			}
 		})

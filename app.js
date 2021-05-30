@@ -14,6 +14,7 @@ var login = require('./routes/login');
 var register = require('./routes/register');
 var student = require('./routes/student');
 var admin = require('./routes/admin');
+var score = require('./routes/score');
 const { urlencoded } = require('express');
 var app = express();
 
@@ -38,6 +39,7 @@ app.use('/',login);
 app.use('/',register);
 app.use('/',student);
 app.use('/',admin);
+app.use('/',score)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

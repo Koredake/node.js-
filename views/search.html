@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/stylesheets/app.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <main class="content">
+    <div class="container-fluid p-0">
+
+        <h1 class="h3 mb-3">学生信息</h1>
+
+        <div class="row">
+            <div class="col-12 col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"><%=search_info[0].school%></h5>
+                        <h6 class="card-subtitle text-muted">高三一班信息详情</h6>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th style="width:40%;">Name</th>
+                                <th style="width:25%">school</th>
+                                <th class="d-none d-md-table-cell" style="width:25%">class</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><%=search_info[0].student_num%></td>
+                                <td><%=search_info[0].sname%></td>
+                                <td><%=search_info[0].school%></td>
+                                <td class="d-none d-md-table-cell"><%=search_info[0].class%></td>
+                                <td class="table-action">
+                                    <a class="change" id="<%=search_info[0].id%>"><i class="align-middle" data-feather="edit-2">修改</i></a>
+                                    <a class="del" id="<%=search_info[0].id%>"><i class="align-middle" data-feather="trash">删除</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+            </div>
+            </main>
+            <script src="/javascripts/app.js"></script>
+            <script src="/javascripts/jquery-3.6.0.js"></script>
+            <script>
+                $(".del").click(function(){
+            let id = $(this).attr("id")
+            $.ajax({
+                type:"get",
+                url:"/del?id="+id+"",
+                success:(data)=>{
+                    if(data=="del_ok"){
+                        alert("删除成功")
+                        window.location.href = '/tables'
+                    }
+                }
+                
+            })
+                })
+                $(".change").click(function(){
+                    let id = $(this).attr("id")
+                    $.ajax({
+                        type:"get",
+                        url:"/change?id="+id+"",
+                        success:(data)=>{
+                            if(data == "ok"){
+                                window.location.href ='/change1'
+                            }
+                        }
+                    })
+                })
+                </script>
+</body>
+</html>

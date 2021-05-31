@@ -35,29 +35,29 @@
             </a>
 					</li>
 
-					<li class="sidebar-item">
+					<!-- <li class="sidebar-item">
 						<a class="sidebar-link" href="pages-profile.html">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
             </a>
-					</li>
+					</li> -->
 
-					<li class="sidebar-item">
+					<!-- <li class="sidebar-item">
 						<a class="sidebar-link" href="pages-settings.html">
               <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
             </a>
-					</li>
+					</li> -->
 
-					<li class="sidebar-item">
+					<!-- <li class="sidebar-item">
 						<a class="sidebar-link" href="pages-invoice.html">
               <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Invoice</span>
             </a>
-					</li>
+					</li> -->
 
-					<li class="sidebar-item">
+					<!-- <li class="sidebar-item">
 						<a class="sidebar-link" href="pages-blank.html">
               <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
             </a>
-					</li>
+					</li> -->
 
 					<li class="sidebar-header">
 						Tools & Components
@@ -77,13 +77,13 @@
 						</ul>
 					</li>
 
-					<li class="sidebar-item">
+					<!-- <li class="sidebar-item">
 						<a class="sidebar-link" href="icons-feather.html">
               <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
             </a>
-					</li>
+					</li> -->
 
-					<li class="sidebar-item">
+					<!-- <li class="sidebar-item">
 						<a data-target="#forms" data-toggle="collapse" class="sidebar-link collapsed">
               <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Forms</span>
             </a>
@@ -91,7 +91,7 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="forms-layouts.html">Form Layouts</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="forms-basic-inputs.html">Basic Inputs</a></li>
 						</ul>
-					</li>
+					</li> -->
 
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="/tables">
@@ -760,7 +760,8 @@ $.ajax({
 					alert("该学生不存在")
 				}
 				else if(data.status == "okay"){
-					alert(JSON.stringify(data.search_res[0].sname)+JSON.stringify(data.search_res[0].school)+JSON.stringify(data.search_res[0].class))
+					window.location.href='/search1'
+					// alert(JSON.stringify(data.search_res[0].sname)+JSON.stringify(data.search_res[0].school)+JSON.stringify(data.search_res[0].class))
 				}
 			}
 		})

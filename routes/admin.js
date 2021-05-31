@@ -40,7 +40,6 @@ const { json } = require('express');
                 console.log(err);
             }
             else{
-                console.log(sc_results);
                 res.render('add',{sc_info:sc_results})}
         })
     })
@@ -69,23 +68,23 @@ connection.query(sql_del,(err,results)=>{
 })
     })
     router.get('/change',(req,res)=>{
-        var id_change = req.query.id;
-        let sql_se = 'select sname,school,class from tab_student where id ='+id_change+'';
-        connection.query(sql_se,(err,results_se)=>{
-            if(err){
-                console.log(err);
-                console.log(results_se);
-            }
-            else{
-                res.json('ok')
-        }
-        })
+        req.session.change_id = req.query.id;
+        console.log(req.session.change_id);
+        res.json('ok')
     })
     router.get('/change1',(req,res)=>{
-        res.render('change')
+        let sql_find = 'select sname,school,class from tab_student where id = '+req.session.change_id+'';
+        connection.query(sql_find,(err,results)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.render('change',{old_info:results})
+            }
+        })
     })
     router.post('/change',(req,res)=>{
-        let sql_change = 'update tab_student set sname ="'+req.body.change_name+'",school ="'+req.body.change_school+'",class="'+req.body.change_class+'" where id ='+id_change+'';
+        let sql_change = 'update tab_student set sname ="'+req.body.change_name+'",school ="'+req.body.change_school+'",class="'+req.body.change_class+'" where id ='+req.session.change_id+'';
         connection.query(sql_change,(err,results)=>{
             if(err){
                 console.log(err);
@@ -96,20 +95,32 @@ connection.query(sql_del,(err,results)=>{
         })
     })
     router.get('/search',(req,res)=>{
-        let in_name = req.query.name;
-        let sql_find = 'select * from tab_student where sname = "'+in_name+'"';
+        req.session.in_name = req.query.name;
+        let sql_find = 'select * from tab_student where sname = "'+req.session.in_name+'"';
         connection.query(sql_find,(err,results)=>{
             if(err){
                 console.log(err);
                 res.json({status:'err'})
             }
             else if(results.length == 0){
-                console.log(results);
                 res.json({status:'emp'})
             }
             else{
-                res.json({search_res:results,status:'okay'})
+                res.json({status:'okay'})
                 }
+        })
+    })
+    router.get('/search1',(req,res)=>{
+        console.log(req.session.in_name);
+        let sql = 'select * from tab_student where sname = "'+req.session.in_name+'"';
+        connection.query(sql,(err,search_results)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log(search_results);
+                res.render('search',{search_info:search_results})
+            }
         })
     })
 router.post('/admin',(req,res)=>{

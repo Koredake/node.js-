@@ -21,8 +21,10 @@
                 <div class="pwd_reg">
                     <input type="password" name="pwd2" id="pwd2" class="pwdInp"placeholder="请确认密码">
                 </div>
+                <div class="pwd_reg">
+                    <input type="text" name="email" placeholder="请输入邮箱号" class="pwdInp">
+                </div>
                 <div class="belong_school">
-                    <!-- <input type="text" name="nickName" id='nickname'class="nickInp" placeholder="请输入别名"> -->
                     <input type="text" list="school" placeholder="请选择学校" class="school_inp" name="school">
                     <datalist id="school">
                         <option value="南昌二中">
@@ -36,19 +38,13 @@
                 <div class="belong_class">
                     <input type="text" list="belong_class" placeholder="请选择班级" class="class_inp" name="belong_class">
                     <datalist id="belong_class">
-                        <option value="高三1班">
-                            高三1班
+                        <option value="高三一班">
+                            高三一班
                         </option>
-                        <option value="高三2班">
-                            高三2班
-                        </option>
-                        <option value="高三3班">
-                            高三3班
+                        <option value="高三二班">
+                            高三二班
                         </option>
                     </datalist>
-                </div>
-                <div class="phoneNumber_reg">
-                    <input type="text" name="phoneNumber"class="phoneInp" placeholder="请输入手机号">
                 </div>
                 <button class="btn" type="submit">注册</button>
             </div>
@@ -57,25 +53,21 @@
     </div>
     <script src="/javascripts/jquery-3.6.0.js"></script>
     <script>
-        function seroalizeToJson(form){
-        var result ={};
-        var f = form.serializeArray();
-        f.forEach(function (item){
-            result[item.name]=item.value
+    $(".btn").click(function(){
+        $.ajax({
+            type:"post",
+            url:"/register",
+            success:(data)=>{
+                if(data.code_status == 'emp'){
+                    alert('输入信息有误,请检查身份信息')
+                    window.location.href = '/register'
+                }
+                else if(data.code_status == 'ok'){
+                    window.location.href = '/login'
+                }
+            }
         })
-        return result
-    }
-    // function checkout (){
-        // if(document.getElementById('pwd1').value!=document.getElementById('pwd2').value){
-            // alert('请保持两次输入密码一致')
-            // return false
-        // }
-        // if(typeof (document.getElementById('nickname').value)!='string'){
-            // alert('别名请输入字符串')
-            // return false
-        // }
-        // return false
-    // }
+    })
     </script>
 </body>
 </html>

@@ -3,43 +3,41 @@ var express = require('express');
 // var crypto = require('crypto');
 var connection = require('../model/connect_mysql');
 var router = express.Router();
-// var {User} = require('../model/user')
 
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
 router.post('/login', (req,res)=>{
-  //接收请求参数  
-  const {usr,pwds} = req.body;
-  if(usr.length==0 && pwds.length==0){
-    res.status(400).render('error')
-  }
-  else{
-    let ad_name = 'admin'
-    connection.query("select * from tab_admin",(err,results,fields)=>{
-      let a__name = results[0].a_name;
-      let a__pas = results[0].a_password;
-            if(a__name == ad_name && a__pas == pwds){
-        res.redirect('admin')
-      }
-
-      else{
-        connection.query("select * from tab_student where sname ='"+usr+"'",(err,results,fields)=>{
-        // console.log(err);
-        let in_name = results[0].sname;
-        let pas = results[0].password;
-        req.session.now_name = in_name;
-        if(usr == in_name && pwds == pas){
-          res.redirect('student')
+  let sql_ad = 'select a_name,a_password from tab_admin';
+  connection.query(sql_ad,(err,ad_result)=>{
+    if(ad_result[0].a_name == 'admin' && ad_result[0].a_password == req.body.pwds){
+      res.redirect('/admin')
+    }
+    else{
+      let st_sql = 'select sname,password from tab_student where sname ='+req.body.usr+'';
+      connection.query(st_sql,(err,st_results)=>{
+       console.log(req.body.usr); 
+        console.log(st_results);
+        if(st_results == undefined){
+          res.json({code_status:'err'})
+        }
+       else if(st_results != undefined && st_results[0].password == req.body.pwds){
+          res.json({code_status:'ok'})
         }
         else{
-          res.render('error')
+          res.json({code_status:'err'})
         }
-    })}
-        // 将用户输入密码与数据库密码进行解密匹配
-        // let istrue = bcrypt.compare(pwds,pas)
-    })
-  }
+      })
+    }
+    // else{
+    //   let sql_st = 'select sname ,password from tab_student where sname ='+req.body.usr+'';
+    //   connection.query(sql_st,(err,st_results)=>{
+    //     if(st_results[0].password == req.body.pwds){
+    //     res.json({code_status:'ok'})
+    //     }
+    //   })
+    // }
+  })
   //在数据库中查询用户输入数据对象
 // let user = await User.findOne({userName:usr})
 

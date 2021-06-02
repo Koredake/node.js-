@@ -7,8 +7,10 @@ router.get('/register', function(req, res, next) {
   res.render("register");
 });
 router.post('/register',(req,res)=>{
-  let sql_select = "select sname,school,class from tab_student where sname ='"+req.body.name+"' AND school = '"+req.body.school+"' AND class ='"+req.body.belong_class+"'";
+  let sql_select = "select id,sname,school,class from tab_student where sname ='"+req.body.name+"' AND school = '"+req.body.school+"' AND class ='"+req.body.belong_class+"'";
   connection.query(sql_select,(err,sel_results)=>{
+    console.log(sel_results[0].id);
+    var re_id = sel_results[0].id;
     if(err){
       console.log(err);
     }
@@ -18,14 +20,9 @@ router.post('/register',(req,res)=>{
         res.json({code_status:'emp'})
       }
       else{
-        let sql_update = "update tab_student set sname ='"+req.body.name+"',password = '"+req.body.pwd1+"',email = '"+req.body.email+"' where id = "+sel_results.id+""
+        let sql_update = "update tab_student set sname ='"+req.body.name+"',password = '"+req.body.pwd1+"',email = '"+req.body.email+"' where id = "+re_id+""
         connection.query(sql_update,(err,results_update)=>{
-          if(err){
-            console.log(err);
-          }
-          else{
             res.json({code_status:'ok'})
-          }
         })
       }
     }

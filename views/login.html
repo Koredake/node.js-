@@ -83,10 +83,28 @@
                 <input type="text" class="e" placeholder="USER NAME" name="usr">
                 <input type="password" class="e" placeholder="PASSWORD" name="pwds">
                 <a href="/register" class="f">没有账号? -->去注册</a>
-                <button type="submit" width="0px"><a class="g">Login</a></button>
+                <button type="submit" width="0px" class="btn"><a class="g">Login</a></button>
             </div>
         </form>
         </div>
     </div>
+    <script src="/javascripts/jquery-3.6.0.js"></script>
+    <script>
+        $('.g').click(function(){
+            $.ajax({
+                type:'post',
+                url:'/login',
+                success:(data)=>{
+                    if(data.code_status == 'err'){
+                        alert('账户或密码错误，请重试')
+                        window.location.href = '/login'
+                    }
+                    else if(data.code_status == 'ok'){
+                        window.location.href = '/student'
+                    }
+                }
+            })
+        })
+    </script>
 </body>
 </html>

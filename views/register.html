@@ -62,7 +62,8 @@
                     alert('输入信息有误,请检查身份信息')
                     window.location.href = '/register'
                 }
-                else if(data.code_status == 'ok'){
+                else{
+                    alert('注册成功')
                     window.location.href = '/login'
                 }
             }

@@ -5,9 +5,8 @@ var connection = require('../model/connect_mysql');
 router.get('/student',(req,res)=>{
     let sql_search = 'select * from tab_score inner join tab_student on tab_score.student_id = tab_student.id where tab_student.sname = "'+req.session.login_name+'"'
     connection.query(sql_search,(err,search_results)=>{
-            if(search_results[0].is_insert == '1'&&req.session.now_name == search_results[0].sname){
-                console.log(search_results[0].is_insert);
-                let sql = 'select * from tab_student where sname ="'+req.session.now_name+'"'
+            if(search_results[0].is_insert == '1'){
+                let sql = 'select * from tab_student where sname ="'+req.session.login_name+'"'
                 connection.query(sql,(err,results,fields)=>{
                         var uname = results[0].sname;
                         var school = results[0].school;
@@ -26,8 +25,8 @@ router.get('/student',(req,res)=>{
                     res.render("student",{user:uname,b_school:school,be_class:b_class,Chinese:chinese,Math:math,English:english,Composite:composite,All:all,University:university})
                 })
             }
-            else if(search_results[0].is_insert == '0'&&req.session.now_name == search_results[0].sname){
-                let sql = 'select * from tab_student where sname ="'+req.session.now_name+'"'
+            else if(search_results[0].is_insert == '0'){
+                let sql = 'select * from tab_student where sname ="'+req.session.login_name+'"'
                 connection.query(sql,(err,results,fields)=>{
                     for(i in results){
                         var uname = results[0].sname;

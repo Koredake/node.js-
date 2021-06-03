@@ -8,13 +8,14 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 router.post('/login', (req,res)=>{
+  req.session.login_name = req.body.usr;
   let sql_ad = 'select a_name,a_password from tab_admin';
   connection.query(sql_ad,(err,ad_result)=>{
     if(ad_result[0].a_name == 'admin' && ad_result[0].a_password == req.body.pwds){
       res.redirect('/admin')
     }
     else{
-      let st_sql = 'select sname,password from tab_student where sname ='+req.body.usr+'';
+      let st_sql = 'select sname,password from tab_student where sname ="'+req.body.usr+'"';
       connection.query(st_sql,(err,st_results)=>{
        console.log(req.body.usr); 
         console.log(st_results);
@@ -22,7 +23,7 @@ router.post('/login', (req,res)=>{
           res.json({code_status:'err'})
         }
        else if(st_results != undefined && st_results[0].password == req.body.pwds){
-          res.json({code_status:'ok'})
+         res.redirect('/student')
         }
         else{
           res.json({code_status:'err'})

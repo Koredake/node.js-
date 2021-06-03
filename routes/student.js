@@ -3,7 +3,7 @@ var router = express.Router();
 // var student = require('./bean/student_info');
 var connection = require('../model/connect_mysql');
 router.get('/student',(req,res)=>{
-    let sql_search = 'select * from tab_score inner join tab_student on tab_score.student_id = tab_student.id where tab_student.sname = "'+req.session.now_name+'"'
+    let sql_search = 'select * from tab_score inner join tab_student on tab_score.student_id = tab_student.id where tab_student.sname = "'+req.session.login_name+'"'
     connection.query(sql_search,(err,search_results)=>{
             if(search_results[0].is_insert == '1'&&req.session.now_name == search_results[0].sname){
                 console.log(search_results[0].is_insert);
